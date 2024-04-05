@@ -19,7 +19,6 @@ export const NavBar = () => {
       }
     }
     authorize()
-    console.log("useeffect");
 })
 
   return (

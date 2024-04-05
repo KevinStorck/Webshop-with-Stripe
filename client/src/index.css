@@ -81,3 +81,7 @@ button:focus-visible {
 main {
   text-align: center;
 }
+
+.productImg {
+  max-width: 300px;
+}

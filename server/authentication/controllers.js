@@ -1,6 +1,9 @@
 const fetchUsers = require("../services/fetchUsers");
 const fs = require("fs").promises;
 const bcrypt = require("bcrypt");
+require("dotenv").config()
+const initStripe = require("../stripe/initStripe")
+const stripe = initStripe()
 
 const login = async (req, res) => {
   const users = await fetchUsers();
@@ -12,7 +15,7 @@ const login = async (req, res) => {
     return res.status(410).json("Your password did not match the user");
 
   req.session.user = user;
-  res.status(200).json({email: user.email, username: user.username});
+  res.status(200).json({id: user.id, email: user.email, username: user.username});
 };
 
 const logout = (req, res) => {
@@ -24,7 +27,6 @@ const register = async (req, res) => {
   const { email, username, password } = req.body;
   const users = await fetchUsers();
   const user = users.find((u) => u.username === username || u.email === email);
-  console.log(user);
   if (user && user.username === username) {
     return res.status(409).json("Username is already in use");
   } else if (user && user.email === email) {
@@ -33,13 +35,10 @@ const register = async (req, res) => {
 
   const hashPass = await bcrypt.hash(password, 10);
 
-  const newUser = {
-    email,
-    username,
-    password: hashPass,
-  };
+  const response = await stripe.customers.create({name: username, email})
 
-  users.push(newUser);
+  users.push({id: response.id, email, username, password: hashPass});
+
   await fs.writeFile("./database/users.json", JSON.stringify(users, null, 2));
 
   if (!user) res.status(201).json("User Successfully created");
@@ -50,7 +49,7 @@ const authorize = (req, res) => {
   if (!req.session.user) {
     return res.status(401).json("You are not logged in");
   }
-  res.status(200).json({email: req.session.user.email, username: req.session.user.username});
+  res.status(200).json({id: req.session.user.id, email: req.session.user.email, username: req.session.user.username});
 };
 
 module.exports = { login, logout, register, authorize };

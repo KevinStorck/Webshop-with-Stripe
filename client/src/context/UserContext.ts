@@ -8,6 +8,7 @@ export interface IUserContext {
 
 export const UserContext = createContext<IUserContext>({
   user: {
+    id: "",
     email: "",
     username: ""
   },

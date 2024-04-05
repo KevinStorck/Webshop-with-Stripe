@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 
 const authRoutes = require("./authentication/router");
+const stripeRoutes = require("./stripe/router")
 
 const PORT = process.env.PORT | 3000;
 
@@ -19,5 +20,6 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
+app.use("/api/stripe", stripeRoutes)
 
 app.listen(PORT, () => console.log("Server is up"));
