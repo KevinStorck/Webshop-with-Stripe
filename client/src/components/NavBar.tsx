@@ -1,6 +1,27 @@
 import { NavLink } from "react-router-dom";
+import { LogoutBtn } from "./LogoutBtn";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
+import { authorizeUser } from "../services/authServices";
 
 export const NavBar = () => {
+  const {user, setUser} = useContext(UserContext)
+
+  useEffect(() => {
+    if (user) return
+    const authorize = async () => {
+      const isLoggedIn = await authorizeUser();
+
+      if (isLoggedIn) {
+        setUser(isLoggedIn)
+      } else {
+        setUser()
+      }
+    }
+    authorize()
+    console.log("useeffect");
+})
+
   return (
     <div className="NavBar">
       <NavLink
@@ -27,14 +48,14 @@ export const NavBar = () => {
       >
         <h1>Checkout</h1>
       </NavLink>
-      <NavLink
+      {!user ? <NavLink
         to={"/login"}
         className={({ isActive }) =>
           isActive ? "nav-link-active" : "nav-link"
         }
       >
         <h1>Login</h1>
-      </NavLink>
+      </NavLink>: <LogoutBtn/>}
       <NavLink
         to={"/register"}
         className={({ isActive }) =>
@@ -43,6 +64,7 @@ export const NavBar = () => {
       >
         <h1>Register</h1>
       </NavLink>
+      {user && <h1>{user.username}</h1>}
     </div>
   );
 };
