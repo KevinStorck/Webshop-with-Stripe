@@ -39,7 +39,6 @@ export const Login = () => {
         onClick={async () => {
           const response = await axios.post(
             "http://localhost:3000/api/auth/login", loginInfo, {withCredentials:true});
-          console.log(response);
           if (response.status === 200) {
             setUser(response.data)
             navigate("/")

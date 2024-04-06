@@ -48,11 +48,10 @@ export const Register = () => {
       />
       <button
         onClick={async () => {
-          const response = await axios.post(
+          await axios.post(
             "http://localhost:3000/api/auth/register",
             registerInfo
           );
-          console.log(response);
         }}
       >
         Log In

@@ -5,6 +5,7 @@ import { Checkout } from "./pages/Checkout";
 import { Products } from "./pages/Products";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import { PaymentResult } from "./pages/PaymentResult";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: "/checkout", element: <Checkout /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/payment-result", element: <PaymentResult /> },
     ],
   },
 ]);

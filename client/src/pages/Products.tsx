@@ -13,13 +13,10 @@ export const Products = () => {
         "http://localhost:3000/api/stripe/products",
         { withCredentials: true }
       );
-      console.log(response);
       setProducts(response.data);
     };
     fetchProducts();
   });
-  console.log(cart);
-  
   
   return (
     <>

@@ -10,7 +10,6 @@ export const LogoutBtn = () => {
         const reponse = await axios.get(
           "http://localhost:3000/api/auth/logout", {withCredentials: true}
         );
-        console.log(reponse);
         if (reponse.status === 200) setUser()
       }}
     >
