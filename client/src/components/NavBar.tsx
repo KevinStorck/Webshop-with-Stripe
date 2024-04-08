@@ -5,21 +5,21 @@ import { UserContext } from "../context/UserContext";
 import { authorizeUser } from "../services/authServices";
 
 export const NavBar = () => {
-  const {user, setUser} = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (user) return
+    if (user) return;
     const authorize = async () => {
       const isLoggedIn = await authorizeUser();
 
       if (isLoggedIn) {
-        setUser(isLoggedIn)
+        setUser(isLoggedIn);
       } else {
-        setUser()
+        setUser();
       }
-    }
-    authorize()
-})
+    };
+    authorize();
+  });
 
   return (
     <div className="NavBar">
@@ -47,14 +47,18 @@ export const NavBar = () => {
       >
         <h1>Checkout</h1>
       </NavLink>
-      {!user ? <NavLink
-        to={"/login"}
-        className={({ isActive }) =>
-          isActive ? "nav-link-active" : "nav-link"
-        }
-      >
-        <h1>Login</h1>
-      </NavLink>: <LogoutBtn/>}
+      {!user ? (
+        <NavLink
+          to={"/login"}
+          className={({ isActive }) =>
+            isActive ? "nav-link-active" : "nav-link"
+          }
+        >
+          <h1>Login</h1>
+        </NavLink>
+      ) : (
+        <LogoutBtn />
+      )}
       <NavLink
         to={"/register"}
         className={({ isActive }) =>
@@ -63,7 +67,16 @@ export const NavBar = () => {
       >
         <h1>Register</h1>
       </NavLink>
-      {user && <h1>{user.username}</h1>}
+      {user && (
+        <NavLink
+          to={"/orders"}
+          className={({ isActive }) =>
+            isActive ? "nav-link-active" : "nav-link"
+          }
+        >
+          <h1>{user.username}</h1>
+        </NavLink>
+      )}
     </div>
   );
 };

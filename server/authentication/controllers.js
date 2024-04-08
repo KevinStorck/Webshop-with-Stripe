@@ -15,6 +15,7 @@ const login = async (req, res) => {
     return res.status(410).json("Your password did not match the user");
 
   req.session.user = user;
+
   res.status(200).json({id: user.id, email: user.email, username: user.username});
 };
 
@@ -46,6 +47,10 @@ const register = async (req, res) => {
 };
 
 const authorize = (req, res) => {
+  // console.log(req.session.user);
+  // console.log(req.session);
+  // console.log(req.session.servicePoint);
+  req.session.servicePoint = "lolol"
   if (!req.session.user) {
     return res.status(401).json("You are not logged in");
   }

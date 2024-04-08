@@ -23,6 +23,7 @@ export const Layout = () => {
     setCart({ ...cart, cart: newCart });
   };
 
+
   return (
     <>
     <CartContext.Provider value={cart}>

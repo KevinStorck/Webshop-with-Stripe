@@ -12,15 +12,14 @@ const fetchProducts = async (req, res) => {
 };
 
 const checkout = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body.servicePoint)
+  req.session.servicePoint = req.body.servicePoint
   let discounts = []
   if (req.body.coupon){
   const coupons = await stripe.coupons.list({limit: 99})
-  // console.log(coupons);
   const coupon = coupons.data.find(c => c.name === req.body.coupon)
   if (coupon) discounts.push({coupon: coupon.id})
   }
-  console.log(discounts);
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     customer: req.body.id,
@@ -32,14 +31,17 @@ const checkout = async (req, res) => {
     cancel_url: "http://localhost:5173/checkout",
   });
 
-  console.log(session);
-
   res.status(200).json({ url: session.url, sessionId: session.id });
 };
 
 const verifyPayment = async (req, res) => {
-    const { payment_status, customer_details, amount_total } =
+    const { payment_status, customer_details, amount_total, customer } =
     await stripe.checkout.sessions.retrieve(req.body.sessionId);
+
+    // const servicePoint = req.session.servicePoint
+    // console.log(servicePoint);
+    // console.log(req.session.servicePoint);
+    // console.log(req.session.user.servicePoint);
     if (payment_status === "paid") {
       const orders = JSON.parse(await fs.readFile("./database/orders.json"));
       await fs.writeFile(
@@ -48,7 +50,9 @@ const verifyPayment = async (req, res) => {
               ...orders,
               {
                   id: generateId(orders),
+                  customerId: customer,
                   customerName: customer_details.name,
+                  servicePoint: req.session.servicePoint,
                   products: (await stripe.checkout.sessions.listLineItems(req.body.sessionId)).data,
                   cost: amount_total,
                   date: new Date(),

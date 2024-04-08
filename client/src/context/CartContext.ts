@@ -3,7 +3,7 @@ import { CartItem } from "../models/CartItem";
 
 export interface ICartContext {
   cart: CartItem[],
-  setCart: (items: CartItem[]) => void;
+  setCart: (items: CartItem[]) => void,
 }
 
 export const CartContext = createContext<ICartContext>({
