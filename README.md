@@ -18,4 +18,4 @@ $ npm i
 
 - Create a .env file in Webshop-with-Stripe/server/ and add two variables: `STRIPE_API_KEY="YOUR_API_KEY"` as well as `POSTNORD_API_KEY="YOUR_API_KEY"`
 
-Create your own key and Id at [STRIPE_API_KEY](https://stripe.com/) and [POSTNORD_API_KEY](https://developer.postnord.com/) Respectively.
+Create your own keys at [STRIPE_API_KEY](https://stripe.com/) and [POSTNORD_API_KEY](https://developer.postnord.com/) Respectively.
