@@ -19,11 +19,11 @@ export const Products = () => {
   });
   
   return (
-    <>
+    <div className="products">
       {products?.data.map((p) => (
         <div className="product" key={p.id}>
-          <p>{p.name} - {p.default_price?.unit_amount / 100}</p>
-          <img className="productImg" src={p.images[0]} alt={p.name}/>
+          <div>
+          <p>{p.name} - {p.default_price?.unit_amount / 100} {p.default_price.currency}</p>
           <button onClick={() => {
             const cartItem = cart.find(i => i.id === p.default_price.id)
             if (cartItem) {
@@ -40,8 +40,10 @@ export const Products = () => {
               unit_amount: p.default_price.unit_amount
             }])}
           }}>Add to Cart</button>
+          </div>
+          <img className="productImg" src={p.images[0]} alt={p.name}/>
         </div>
       ))}
-    </>
+    </div>
   );
 };

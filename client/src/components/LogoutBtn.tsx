@@ -6,6 +6,7 @@ export const LogoutBtn = () => {
     const {setUser} = useContext(UserContext)
   return (
     <button
+    className="logoutBtn"
       onClick={async () => {
         const reponse = await axios.get(
           "http://localhost:3000/api/auth/logout", {withCredentials: true}

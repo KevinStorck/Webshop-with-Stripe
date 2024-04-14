@@ -47,9 +47,6 @@ const register = async (req, res) => {
 };
 
 const authorize = (req, res) => {
-  // console.log(req.session.user);
-  // console.log(req.session);
-  // console.log(req.session.servicePoint);
   req.session.servicePoint = "lolol"
   if (!req.session.user) {
     return res.status(401).json("You are not logged in");

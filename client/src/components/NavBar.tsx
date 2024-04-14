@@ -59,14 +59,14 @@ export const NavBar = () => {
       ) : (
         <LogoutBtn />
       )}
-      <NavLink
+      {!user && <NavLink
         to={"/register"}
         className={({ isActive }) =>
           isActive ? "nav-link-active" : "nav-link"
         }
       >
         <h1>Register</h1>
-      </NavLink>
+      </NavLink>}
       {user && (
         <NavLink
           to={"/orders"}

@@ -1,6 +1,6 @@
 export interface ServicePoint {
     name: string,
-    deliveryAdress: DeliveryAdress,
+    deliveryAddress: DeliveryAdress,
     servicePointId: string
 }
 

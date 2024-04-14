@@ -21,6 +21,7 @@ export const PaymentResult = () => {
             if (response.status === 200) {
                 setVerified(response.data.isPayed)
                 setIsLoading(false)
+                localStorage.removeItem("stripeSessionId")
             }
         }
 

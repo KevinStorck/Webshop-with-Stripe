@@ -1,3 +1,5 @@
+import { Product } from "./Product"
+
 export interface Order {
     id: 44569915,
     customerId: string,
@@ -21,7 +23,6 @@ export interface Order {
   }
 
   export interface Price {
-    price: {
         id: string,
         object: string,
         active: boolean,
@@ -33,13 +34,12 @@ export interface Order {
         lookup_key: string | null,
         metadata: object,
         nickname: string | null,
-        product: string,
+        product: Product,
         recurring: object | null,
         tax_behavior: string | null,
         tiers_mode: string | null,
         transform_quantity: object | null,
         type: string,
-        unit_amount: number | null,
+        unit_amount: number,
         unit_amount_decimal: string | null
-      },
   }

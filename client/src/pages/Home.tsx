@@ -1,3 +1,3 @@
 export const Home = () => {
-  return <h1>Home</h1>;
+  return <h2>Hi and welcome! Use promo code: FREDRIK_OWNS_25 for 25% off of your entire purchase</h2>;
 };

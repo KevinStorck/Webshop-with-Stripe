@@ -74,8 +74,9 @@ button:focus-visible {
 .NavBar {
   display: flex;
   gap: 15px;
-  height: 100px;
+  height: 70px;
   width: 100dvw;
+  align-items: center;
 }
 
 main {
@@ -84,4 +85,81 @@ main {
 
 .productImg {
   max-width: 300px;
+  margin: 0;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+  background-color: #535bf275;
+  padding: 10px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.servicePoints {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+
+.servicePoint {
+  width: fit-content;
+}
+
+.spActive {
+  background-color: #535bf275;
+}
+
+.servicePoint:hover {
+  cursor: pointer;
+  background-color: #646cff;
+}
+
+.logoutBtn {
+  height: fit-content;
+}
+
+.nav-link {
+  color: #2c7cc2;
+  font-size: smaller;
+}
+
+.nav-link-active {
+  color: #489be4;
+  text-decoration: solid underline 2px;
+  font-size: smaller;
+}
+
+.orderImg {
+  max-height: 150px;
+}
+
+.orderProduct {
+  width: fit-content;
+}
+
+.orderProducts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(80, 86, 187, 0.712);
+  padding: 10px;
+  width: fit-content;
+  margin: 10px auto 20px auto;
 }
